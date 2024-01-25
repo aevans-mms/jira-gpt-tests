@@ -24,5 +24,7 @@ public class Application {
 		log.info("JIRA_TOKEN: " + JIRA_TOKEN);
 
 		JiraTestExtractor jira = new JiraTestExtractor(JIRA_URL, JIRA_TOKEN);
+
+		jira.doit();
 	}
 }
