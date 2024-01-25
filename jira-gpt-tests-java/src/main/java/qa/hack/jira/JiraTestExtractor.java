@@ -57,22 +57,21 @@ public class JiraTestExtractor {
 		return response;
 	}
 
-	public List<Component> getProjectComponents(String projectKey) {
-		var response = jiraRequest()
-				.pathParam("projectKey", projectKey)
-				.get("/projects/{projectKey}");
-
-		log.info(response.getStatusLine());
-
-		List<Component> components = response.jsonPath().<Component>getList("components");
-		return components;
-	}
+//	public List<Component> getProjectComponents(String projectKey) {
+//		var response = jiraRequest()
+//				.pathParam("projectKey", projectKey)
+//				.get("/projects/{projectKey}");
+//
+//		log.info(response.getStatusLine());
+//
+//		List<Component> components = response.jsonPath().<Component>getList("components");
+//		return components;
+//	}
 
 	public Response getIssue(String issueId) {
 		var response = RestAssured.given(jiraRequest())
-				.basePath(JIRA_API_PATH + "/issue/{issue_id}")
 				.pathParam("issueId", issueId)
-				.get();
+				.get("/issue/{issueId}");
 
 		log.info("getIssue response: " + response.statusCode() + "\n" + response.getBody().asPrettyString());
 		return response;

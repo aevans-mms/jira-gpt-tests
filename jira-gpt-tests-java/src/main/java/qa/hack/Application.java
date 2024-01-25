@@ -19,7 +19,7 @@ public class Application {
 	public static void main(String[] args) {
 		System.out.println("Extract tests from Jira");
 
-		log.debug(config.root().render());
+//		log.debug(config.root().render());
 
 		String JIRA_URL = config.getString("JIRA_URL");
 		log.info("JIRA_URL: " + JIRA_URL);
