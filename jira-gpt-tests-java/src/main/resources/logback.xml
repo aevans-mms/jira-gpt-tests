@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.MMM} %-5level %logger{40}.%M - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>target/hack.log</file>
+		<append>false</append>
+		<encoder>
+			<pattern>%d{HH:mm:ss.MMM} %-5level %logger{40}.%M - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<root level="warn">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="FILE"/>
+	</root>
+
+	<logger name="qa.hack" level="info" additivity="false">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="FILE"/>
+	</logger>
+
+	<logger name="qa.hack.jira" level="debug" additivity="false">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="FILE"/>
+	</logger>
+
+	<logger name="qa.hack.gpt" level="debug" additivity="false">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="FILE"/>
+	</logger>
+
+	<logger name="qa.hack.tests" level="debug" additivity="false">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="FILE"/>
+	</logger>
+
+</configuration>
