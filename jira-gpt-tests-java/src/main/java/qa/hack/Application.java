@@ -2,9 +2,13 @@ package qa.hack;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
+import io.restassured.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import qa.hack.jira.JiraTestExtractor;
+import qa.hack.jira.Project;
+
+import java.util.List;
 
 
 public class Application {
@@ -25,6 +29,14 @@ public class Application {
 
 		JiraTestExtractor jira = new JiraTestExtractor(JIRA_URL, JIRA_TOKEN);
 
-		jira.doit();
+		log.info("get projects...");
+		var  projectsResponse = jira.getProjects();
+		log.info(projectsResponse.getStatusLine());
+
+		var projectsJsonPath = projectsResponse.jsonPath();
+		List<Project> projectsList = projectsJsonPath.<Project>getList(".");
+		log.info("# of projects: " + projectsList.size());
+
+
 	}
 }
