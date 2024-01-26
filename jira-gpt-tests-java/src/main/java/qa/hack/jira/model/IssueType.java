@@ -1,4 +1,4 @@
-package qa.hack.jira;
+package qa.hack.jira.model;
 
 public class IssueType {
 	public String self;

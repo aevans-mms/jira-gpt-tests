@@ -5,7 +5,7 @@ import com.typesafe.config.ConfigFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class JiraApiTest {
+public abstract class JiraApiTestBase {
 
 	Logger log;
 	Config config;
@@ -15,7 +15,7 @@ public abstract class JiraApiTest {
 	String JIRA_API_PATH;
 	String ZEPHYR_API_PATH;
 
-	public JiraApiTest() {
+	public JiraApiTestBase() {
 		log = LoggerFactory.getLogger(this.getClass());
 		config = ConfigFactory.load();
 

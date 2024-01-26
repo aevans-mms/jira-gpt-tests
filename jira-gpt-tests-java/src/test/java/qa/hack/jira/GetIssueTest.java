@@ -6,14 +6,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.specification.QueryableRequestSpecification;
 import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.SpecificationQuerier;
 import org.junit.jupiter.api.Test;
+import qa.hack.jira.model.TestStep;
 
 import java.util.List;
 
-public class GetIssueTest extends JiraApiTest {
+public class GetIssueTest extends JiraApiTestBase {
 
 	@Test
 	public void testGetIssueWithSteps() throws JsonProcessingException {

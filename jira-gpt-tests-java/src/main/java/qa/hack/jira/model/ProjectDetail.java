@@ -1,4 +1,4 @@
-package qa.hack.jira;
+package qa.hack.jira.model;
 
 import java.util.List;
 

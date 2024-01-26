@@ -45,7 +45,7 @@ public class Project {
 		return String.format(
 		"""
 		Project
-		-----
+		-------
 		id: %s,
 		key: %s,
 		url: %s, 
