@@ -1,4 +1,4 @@
-package qa.hack.jira;
+package qa.hack.jira.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -21,5 +21,36 @@ public class Project {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		return mapper.readValue(json, Project.class);
+	}
+
+	public String toJson() {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			return String.format(
+			"""
+			{
+				"id": "%s",
+				"key": "%s",
+				"url": "%s", 
+				"name": "%s"
+			}		
+			"""
+			, id, key, self, name);
+		}
+	}
+
+	public String toString() {
+		return String.format(
+		"""
+		Project
+		-----
+		id: %s,
+		key: %s,
+		url: %s, 
+		name: %s 
+		"""
+		, id, key, self, name);
 	}
 }
