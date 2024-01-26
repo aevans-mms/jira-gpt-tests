@@ -1,11 +1,12 @@
 package qa.hack;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-import io.restassured.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import qa.hack.jira.JiraTestExtractor;
+import qa.hack.jira.JiraApi;
 import qa.hack.jira.Project;
 
 import java.util.List;
@@ -21,22 +22,25 @@ public class Application {
 
 //		log.debug(config.root().render());
 
-		String JIRA_URL = config.getString("JIRA_URL");
-		log.info("JIRA_URL: " + JIRA_URL);
+		String JIRA_BASE_URL = config.getString("JIRA_BASE_URL");
+		log.info("JIRA_URL: " + JIRA_BASE_URL);
 
 		String JIRA_TOKEN = config.getString("JIRA_TOKEN");
 		log.info("JIRA_TOKEN: " + JIRA_TOKEN);
 
-		JiraTestExtractor jira = new JiraTestExtractor(JIRA_URL, JIRA_TOKEN);
+		JiraApi jira = new JiraApi(JIRA_BASE_URL, JIRA_TOKEN);
 
-		log.info("get projects...");
-		var  projectsResponse = jira.getProjects();
-		log.info(projectsResponse.getStatusLine());
+		log.info("get all projects...");
+		List<Project> projects = jira.getProjects();
+		for (var project : projects) {
+			System.out.println("Project: " + project.name);
+			System.out.println("Project Key: " + project.key);
+			System.out.println("Project Id: " + project.id);
+		}
 
-		var projectsJsonPath = projectsResponse.jsonPath();
-		List<Project> projectsList = projectsJsonPath.<Project>getList(".");
-		log.info("# of projects: " + projectsList.size());
-
-
+		log.info("get QAUTO project details...");
+		Project project = jira.getProject(jira.QAUTO_PROJECT_ID);
+		System.out.println("Project Key: " + project.key);
+		System.out.println("Project Id: " + project.id);
 	}
 }
