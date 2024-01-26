@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import qa.hack.jira.model.Issue;
 import qa.hack.jira.JiraApi;
 import qa.hack.jira.model.Project;
+import qa.hack.jira.model.TestStep;
 
 import java.util.List;
 
@@ -68,6 +69,16 @@ public class Application {
 
 	public static void getTestDetails(String testId) {
 		System.out.println("Get TestDetails: " + testId);
+
+		JiraApi jira = getJiraApi();
+
+		Issue issue = jira.getIssue(testId);
+		List<TestStep> testSteps = jira.getTestSteps(issue.id);
+
+		System.out.println(issue);
+		for (TestStep testStep: testSteps) {
+			System.out.println(testStep);
+		}
 	}
 
 	public static JiraApi getJiraApi() {
