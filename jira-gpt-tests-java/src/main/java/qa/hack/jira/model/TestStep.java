@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.List;
 
 public class TestStep {
 	public Integer id;
@@ -55,11 +54,8 @@ public class TestStep {
 		return String.format(
 		"""
 		Step: %s
-		--------,
-		actions: %s
-		data: %s 
-		expected result: %s 
+		result: %s 
 		"""
-		, orderId, step, data, result);
+		,step, result);
 	}
 }
